@@ -1,4 +1,5 @@
 require "demo_howto/version"
+require "demo_howto_class"
 
 module DemoHowto
   class DemoHowto
