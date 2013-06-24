@@ -1,29 +1,33 @@
 # DemoHowto
 
-TODO: Write a gem description
+# Howto create a gem with tests & other stuff:
+    gem install bundler # Si jamais il n'est pas installé
+    bundle gem demo_howto -t
+    cd demo_howto
+    gvim demo_howto.gemspec # Add descrition/summary & rspec
+    bundle
+    bundle exec rspec
+    bundle exec guard init
+    # Open Guardfile and clean all unneeded parts (Rails, ...)
+    md spec\lib
 
-## Installation
+# Launch tests with:
+    bundle exec guard
 
-Add this line to your application's Gemfile:
+# Edit test & lib with a simple class:
+    gvim -o lib\demo_howto_class.rb spec\lib\demo_howto_class_spec.rb
 
-    gem 'demo_howto'
+# Edit test & lib the same with a module:
+    gvim -o lib\demo_howto.rb spec\lib\demo_howto_spec.rb
 
-And then execute:
 
-    $ bundle
+## Add/update to gemspec file:
+    spec.test_files    = spec.files.grep(%r{^(spec)/})
 
-Or install it yourself as:
-
-    $ gem install demo_howto
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Contributing
-
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+    spec.add_development_dependency "rspec"
+    spec.add_development_dependency "wdm" if RUBY_PLATFORM =~ /mingw/
+    spec.add_development_dependency "ruby_gntp" if RUBY_PLATFORM =~ /mingw/
+    spec.add_development_dependency "rb-fsevent" if RUBY_PLATFORM =~ /darwin/
+    spec.add_development_dependency "growl" if RUBY_PLATFORM =~ /darwin/
+    spec.add_development_dependency "guard"
+    spec.add_development_dependency "guard-rspec"
